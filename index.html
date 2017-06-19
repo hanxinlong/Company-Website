@@ -4,8 +4,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>国雷安全防护科技有限公司</title>
   <link type="text/css" href="css/title.css" rel="stylesheet" />
+  <link type="text/css" href="css/app.css" rel="stylesheet" />
   <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-  <script type="text/javascript" src="js/superslide.2.1.js"></script>
 </head>
 <body>
 <div class="container">
@@ -20,45 +20,166 @@
         <li><a href="#">联系我们</a></li>
       </ul>
   </div>
-  <div class="slider">
-      <div class="bd">
-        <ul>
-          <li class="on"><a href="javascript:void(0)"><img src="images/banner1.png" alt="亿升财富 财富易升" /></a></li>
-          <li><a href="javascript:void(0)"><img src="images/banner2.png" alt="汇集金融领域精英 提供专业引资服务" /></a></li>
-          <li><a href="javascript:void(0)"><img src="picture/banner3.jpg" alt="亿升财富诚招区域代理" /></a></li>
-        </ul>
-      </div>
-      <div class="hd"><ul></ul></div>
-      <div class="pnBtn prev"><span class="blackBg"></span><a class="arrow" href="javascript:void(0)"></a></div>
-      <div class="pnBtn next"><span class="blackBg"></span><a class="arrow" href="javascript:void(0)"></a></div>
+    <div class="Homebanner">
+
+<div class="lunbo">
+  <div class="fugai">
+    <div class="fugai1"></div>
+    <div class="fugai2"></div>
+    <div class="fugai3"></div>
+    <div class="cb"></div>
   </div>
+
+  <div class="dianzui">
+    <div class="dian"></div>
+  </div>
+  <div class="box">
+    <img src="images/banner1.png">
+    <img src="images/banner2.png">
+    <img src="picture/banner3.jpg">    
+  </div>
+  <div class="btn">
+    <div class="btn-l fl"><</div>
+    <div class="btn-con-l fl"></div>
+    
+    <div class="btn-r fr">></div>
+    <div class="btn-con-r fr">r</div>
+    
+
+  </div>
+
+  <ul class="list-li">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+</div>
 </div>
 </body>
 <script type="text/javascript">
-      $(document).ready(function(){
+var i=0;
+var stop;
+/*  每隔2秒运行一次轮播*/
+stop=setInterval(function(){
+  i++;
+  if(i>6){
+    i=1;
+  }
+  xiaoguo2(i);
+  xiaoguo(i);
+},4000)
+/*  动作函数*/
+function xiaoguo2(n){
+/*    块一*/
+  $('.fugai1')
+  .css({"background-image":"url(images/banner1"+n+".png)",'background-repeat':'no-repeat','display':'block',"backgroundPosition-x":0+'px'})
+  .animate({"backgroundPosition-x":-1920+'px'},3000)
+  .css({'display':'none'})
+  //块二
+  $('.fugai2')
+  .css({"background-image":"url(image/lunbo"+n+".jpg)",'background-repeat':'no-repeat','display':'block',"backgroundPosition-x":-200+'px'})
+  .animate({"backgroundPosition-x":-1920*2+'px'},3000)
+  .animate({'display':'none'})
+  //块三
+  $('.fugai3')
+  .css({"background-image":"url(image/lunbo"+n+".jpg)",'background-repeat':'no-repeat','display':'block',"backgroundPosition-x":0+'px'})
+  .animate({"backgroundPosition-x":-1920*3+'px'},3000)
+  .animate({'display':'none'})
+/*    $('.fugai')
+  .css({"background-image":"url(image/lunbo"+n+".jpg)",'background-repeat':'no-repeat','display':'block',"backgroundPosition-x":0+'px'})
+  .deplay(3000).animate({"backgroundPosition-x":-730*3+'px'},3000)
+  .animate({'display':'none'},10)   */
+}
+$('.list-li>li').eq(0).css({'background-color':'orange'})
+function xiaoguo(n){
+  var b=n-1;  
+  $('.list-li>li').css({'background-color':'#F9263E'})  
+  $('.list-li>li').eq(b).css({'background-color':'orange'})
+  $('.dian').animate({'width':1920+'px'},2000)
+  $('.dian').animate({'width':0+'px'},100)
+  $('.box').animate({'margin-left':-n*1920+'px'},2000,function(){
+    if(n==6){
+      $('.box').css({'margin-left':0+'px'})
+    }
+  })
+}
+/*  左右按钮*/
+function huan(n){
+  var j=i;
+  i=i+n;
+  
+  if(i>6){
+    i=1;
+  }
+  if(i<0){
+    i=5;
+  }
+  xiaoguo(i);
+}
+//左箭头
+$('.btn-l').click(function(){
+clearInterval(stop);
+  stop=null;      
+    huan(-1); 
+    if(i==0){
+      $('.btn-con-l').html('<img src="image/lunbo'+parseInt(6)+'.jpg">')
+    }else{
+      $('.btn-con-l').html('<img src="image/lunbo'+parseInt(i)+'.jpg">')
+    }
+    $('.box').stop(true,true);
+    $('.dian').stop(true,true);
+    
+});
+//右箭头
+$('.btn-r').click(function(){
+  clearInterval(stop);
+  stop=null;
+    huan(1);      
+    if(i==5){
+      $('.btn-con-r').html('<img src="image/lunbo'+parseInt(1)+'.jpg">')
+    }else if (i==6) {
+      $('.btn-con-r').html('<img src="image/lunbo'+parseInt(2)+'.jpg">')
+    }else{
+      $('.btn-con-r').html('<img src="image/lunbo'+parseInt(i+2)+'.jpg">')
+    }
+    $('.box').stop(true,true);
+    $('.dian').stop(true,true);
+});
+//$('.btn-l').click(function(){huan(-1);});
+//$('.btn-r').click(function(){huan(1);});
 
-        /* 设置第一张图片 */
-        $(".slider .bd li").first().before($(".slider .bd li").last());
+/*  鼠标放上大块*/
+$('.lunbo').mouseover(function(){
+  clearInterval(stop);
+  stop=null;
+  $('.btn').show();
 
-        /* 鼠标悬停箭头按钮显示 */
-        $(".slider").hover(function(){
-          $(this).find(".arrow").stop(true,true).fadeIn(300)
-        },function(){
-          $(this).find(".arrow").fadeOut(300)
-        });
+})
+/*  鼠标离开大块*/
+$('.lunbo').mouseout(function(){
+  if(stop==null){
+    stop=setInterval(function(){
+      i++;
+      if(i>6){
+        i=1;
+      }
+      xiaoguo(i);
+      xiaoguo2(i);
+    },4000)     
+  }
+  $('.btn').hide();
+  $('.btn-con-l').text('');
+  $('.btn-con-r').text('');
+})
+/*按钮小标题*/
+$('.list-li>li').mouseover(function(){    
+  clearInterval(stop);
+  stop=null;
+  i= Number($(this).text());
+  xiaoguo($(this).text())
+  $('.box').stop(true,true);
+  $('.dian').stop(true,true);
+})
 
-        /* 滚动切换 */
-        $(".slider").slide({
-          titCell:".hd ul",
-          mainCell:".bd ul",
-          effect:"leftLoop",
-          autoPlay:true,
-          vis:1,
-          autoPage:true,
-          trigger:"click"
-        });
-
-      });
-    </script>
-
+</script>
 </html>
